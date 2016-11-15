@@ -14,8 +14,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DBConnection dbConnection = new DBConnection();
+        dbConnection.easyPocketDatabase = openOrCreateDatabase("pocket",MODE_PRIVATE,null);
         dbConnection.createTestDatabase();
         SQLiteDatabase db = dbConnection.getEasyPocketDatabase();
+
 
         Cursor resultSet = db.rawQuery("Select * from Libros",null);
         resultSet.moveToFirst();
