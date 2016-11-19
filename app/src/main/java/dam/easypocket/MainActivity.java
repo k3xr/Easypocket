@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor resultSet = db.rawQuery("Select * from Libros",null);
         resultSet.moveToFirst();
 
-        TextView text = (TextView)findViewById(R.id.textView);
+        TextView text = (TextView)findViewById(R.id.crearModifColeccion);
 
         for(int i = 0; i < resultSet.getCount(); i++){
             resultSet.moveToPosition(i);
