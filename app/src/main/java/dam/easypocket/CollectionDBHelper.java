@@ -12,9 +12,9 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Pocket.db";
-    public static final String COLLECTIONS_TABLE_NAME = "Collections";
-    public static final String COLLECTIONS_COLUMN_NAME = "name";
-    public static final String COLLECTIONS_COLUMN_OWNER = "owner";
+    private static final String COLLECTIONS_TABLE_NAME = "Collections";
+    private static final String COLLECTIONS_COLUMN_OWNER = "owner";
+    static final String COLLECTIONS_COLUMN_NAME = "name";
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
@@ -36,7 +36,7 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         db = this.getWritableDatabase();
     }
 
-    SQLiteDatabase getDb(){
+    SQLiteDatabase getDb() {
         return db;
     }
 
@@ -51,10 +51,19 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         onCreate(db);
     }
 
+    @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
 
+    /**
+     * Creates a new Collection
+     * @param name name of the collection
+     * @param owner owner of the collection
+     * @param columnName String array with the names for the columns of the table
+     * @param columnType String array with the type for the columns of the table
+     * @return id of the new collection
+     */
     long insertCollection (String name, String owner, String[] columnName, String[] columnType) {
 
         // Create a new map of values, where column names are the keys
@@ -70,13 +79,12 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         if(columnName.length != columnType.length){
             return -1;
         }
-        String query = "CREATE TABLE IF NOT EXISTS "+name+"(";
+        String query = "CREATE TABLE IF NOT EXISTS " + name + "(";
 
         for(int i = 0; i < columnName.length; i++){
             if(i == 0){
                 query += columnName[i] + " " + columnType[i];
-            }
-            else{
+            } else{
                 query += ","+columnName[i] + " " + columnType[i];
             }
 
@@ -89,6 +97,11 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         return insertID;
     }
 
+    /**
+     * Retrieves collections which name matches the given string
+     * @param name pattern to search in collections names
+     * @return cursor with the results of the search
+     */
     Cursor getCollections(String name) {
 
         // Define a projection that specifies which columns from the database
@@ -119,6 +132,12 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         );
     }
 
+    /**
+     * Updates the name of a collection
+     * @param newName new name of the collection
+     * @param oldName old name of the collection
+     * @return int
+     */
     int updateCollection(String newName, String oldName) {
 
         // New value for one column
@@ -144,7 +163,12 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         return res;
     }
 
-    Integer deleteCollection (String name) {
+    /**
+     * Removes a collection and its data
+     * @param name name of the collection to remove
+     * @return int
+     */
+    int deleteCollection (String name) {
 
         // Define 'where' part of query.
         String selection = CollectionDBHelper.COLLECTIONS_COLUMN_NAME + " LIKE ?";
@@ -155,10 +179,39 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         // Issue SQL statement.
         int res = db.delete(CollectionDBHelper.COLLECTIONS_TABLE_NAME, selection, selectionArgs);
 
-        String query = "DROP TABLE "+name;
+        String query = "DROP TABLE IF EXISTS " + name;
         db.execSQL(query);
 
         return res;
 
     }
+
+    /**
+     * Inserts data into a collection
+     * @param collectionName name of the collection to insert data
+     * @param values String containing the value for each column
+     * @return true if insertion was successful
+     */
+    boolean insertToCollection (String collectionName, String[] values) {
+
+        if (values.length == 0){
+            return false;
+        }
+
+        String valuesFormatted = "";
+
+        for (String value : values) {
+            if(valuesFormatted.equals("")){
+                valuesFormatted = "'" + value + "'";
+            } else{
+                valuesFormatted += ", '" + value + "'";
+            }
+        }
+
+        String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
+        db.execSQL(query);
+
+        return true;
+    }
+
 }

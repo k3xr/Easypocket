@@ -15,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(testCollectionsDB());
     }
 
+    /**
+     * Tests the CollectionDBHelper class methods
+     * @return true if tests are ok
+     */
     private boolean testCollectionsDB(){
         CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
 
@@ -52,14 +56,22 @@ public class MainActivity extends AppCompatActivity {
 
         boolean cond4 = collectionName.equals("testCollectionNew");
 
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book1', 40, 1);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book2', 90, 1);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book3', 87090, 1);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book4', 0, 0);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book5', 1, 1);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book6', 498, 0);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book7', 4235, 1);");
-        db.getDb().execSQL("INSERT INTO testCollectionNew VALUES('book8', 600, 1);");
+        String[] values = {"book1", "40", "1"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book1", "540", "1"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book2", "6540", "0"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book3", "4350", "1"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book4", "40436", "1"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book5", "403", "0"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book6", "40654", "0"};
+        db.insertToCollection("testCollectionNew", values);
+        values = new String[]{"book7", "440", "1"};
+        db.insertToCollection("testCollectionNew", values);
 
         Cursor resultSet = db.getDb().rawQuery("Select * from testCollectionNew",null);
         resultSet.moveToFirst();
