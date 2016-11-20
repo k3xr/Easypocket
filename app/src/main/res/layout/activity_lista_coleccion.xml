@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_crear_omodif_coleccion"
+    android:id="@+id/activity_lista_coleccion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dam.easypocket.CrearOModifColeccion">
-
-
+    tools:context="dam.easypocket.ListaColeccion">
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,33 +18,21 @@
         android:id="@+id/layoutPrincipal">
 
         <TextView
-            android:text="Crear/modificar Colección"
-            android:layout_width="wrap_content"
+            android:text="Mis Colecciones"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:id="@+id/misColecciones"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:textAlignment="center"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="nombreColección"
-            android:layout_width="363dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/misColecciones"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp"
-            android:id="@+id/nombreColeccion"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="30sp"
-            android:textStyle="normal|bold"
+            android:layout_alignParentStart="true"
             android:textAlignment="center" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="129dp"
-            android:layout_weight="0.11"
-            android:id="@+id/scrollCampos">
+            android:layout_weight="1.21"
+            android:id="@+id/scrollColecciones">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,10 +41,11 @@
         </ScrollView>
 
         <Button
-            android:text="Añadir Campo"
+            android:text="Añadir Colección"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonAddCampo" />
+            android:id="@+id/buttonAniadirColeccion"
+            android:textAllCaps="false"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -67,20 +54,28 @@
             android:id="@+id/layoutAcciones">
 
             <Button
-                android:text="Guardar Y Salir"
+                android:text="Añadir Elemento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/buttonGuardarYSalir"
+                android:id="@+id/buttonAniadirElemento"
                 android:layout_weight="1"
                 android:textAllCaps="false" />
 
             <Button
-                android:text="Cancelar y salir"
+                android:text="Editar Diseño"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/buttonCancelarYSalir"
+                android:id="@+id/buttonEditarDisenio"
                 android:layout_weight="1"
                 android:textAllCaps="false" />
+
+            <Button
+                android:text="Explorar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonExplorar"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
     </LinearLayout>
