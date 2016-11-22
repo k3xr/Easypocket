@@ -17,15 +17,19 @@ public class ListaColeccion extends AppCompatActivity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.linSV);
 
         CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
-        Cursor cursor = db.getCollections("testCollectionNew");
+        Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections",null);
 
-        cursor.moveToFirst();
-        String collectionName = cursor.getString(cursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
-
-        Button item = new Button(this);
-        item.setText(collectionName);
-        item.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT));
-        ll.addView(item);
+        try {
+            while (allCollectionsCursor.moveToNext()) {
+                Button item = new Button(this);
+                String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
+                item.setText(collectionName);
+//                item.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT));
+                ll.addView(item);
+            }
+        } finally {
+            allCollectionsCursor.close();
+        }
 
     }
 }
