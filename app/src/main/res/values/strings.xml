@@ -4,4 +4,12 @@
 
     <string name="saveAndAddMore">Save and add more</string>
     <string name="saveAndExit">Save and exit</string>
+
+    <!--ZONA LISTA_COLECCION-->
+    <string name="myCollection">My Collection</string>
+    <string name="addCollection">Add Collection</string>
+    <string name="addElement">Add Element</string>
+    <string name="editDesign">Edit Design</string>
+    <string name="exploreCollection">Explore Collection</string>
+
 </resources>
