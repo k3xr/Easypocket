@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean testCollectionsDB(){
         CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
 
-        db.deleteCollection("testCollectionNew");
+        db.deleteCollection("books");
+        db.deleteCollection("suitcase");
 
         String[] columns = new String[3];
         columns[0] = "column1";
@@ -49,46 +50,46 @@ public class MainActivity extends AppCompatActivity {
         columnTypes[1] = "INT";
         columnTypes[2] = "BOOLEAN";
 
-        long insertID = db.insertCollection("testCollection", "testOwner", columns, columnTypes);
+        long insertID = db.insertCollection("booksOld", "testOwner", columns, columnTypes);
 
         boolean cond1 = insertID == 1;
 
-        Cursor cursor = db.getCollections("testCollection");
+        Cursor cursor = db.getCollections("booksOld");
 
         cursor.moveToFirst();
         long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(CollectionDBHelper._ID));
         String collectionName = cursor.getString(cursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
 
         boolean cond2 = insertID == itemId;
-        boolean cond3 = collectionName.equals("testCollection");
+        boolean cond3 = collectionName.equals("booksOld");
 
-        db.updateCollection("testCollectionNew", "testCollection");
+        db.updateCollection("books", "booksOld");
 
-        cursor = db.getCollections("testCollectionNew");
+        cursor = db.getCollections("books");
 
         cursor.moveToFirst();
         collectionName = cursor.getString(cursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
 
-        boolean cond4 = collectionName.equals("testCollectionNew");
+        boolean cond4 = collectionName.equals("books");
 
         String[] values = {"book1", "40", "1"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book1", "540", "1"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book2", "6540", "0"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book3", "4350", "1"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book4", "40436", "1"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book5", "403", "0"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book6", "40654", "0"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
         values = new String[]{"book7", "440", "1"};
-        db.insertToCollection("testCollectionNew", values);
+        db.insertToCollection("books", values);
 
-        Cursor resultSet = db.getDb().rawQuery("Select * from testCollectionNew",null);
+        Cursor resultSet = db.getDb().rawQuery("Select * from books",null);
         resultSet.moveToFirst();
 
         TextView text = (TextView)findViewById(R.id.misColecciones);
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             text.setText(text.getText()+"\n"+resultSet.getString(0)+": "+resultSet.getInt(1));
         }
         resultSet.close();
+
+        db.insertCollection("suitcase", "testOwner", columns, columnTypes);
 
         return cond1 && cond2 && cond3 && cond4;
     }
