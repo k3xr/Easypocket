@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Easypocket</string>
-    <string name="test"></string>
+    <string name="test">testString</string>
+
+    <string name="saveAndAddMore">Save and add more</string>
+    <string name="saveAndExit">Save and exit</string>
 </resources>
