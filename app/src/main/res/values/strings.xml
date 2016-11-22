@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Easypocket</string>
     <string name="test"></string>
+    <!--ZONA LISTA_COLECCION-->
+    <string name="myCollection">My Collection</string>
+    <string name="addCollection">Add Collection</string>
+    <string name="addElement">Add Element</string>
+    <string name="editDesign">Edit Design</string>
+    <string name="exploreCollection">Explore Collection</string>
 </resources>

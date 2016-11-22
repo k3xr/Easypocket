@@ -18,10 +18,10 @@
         android:id="@+id/layoutPrincipal">
 
         <TextView
-            android:text="Mis Colecciones"
+            android:text="@string/myCollection"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:id="@+id/misColecciones"
+            android:id="@+id/textViewMyCollection"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:textAlignment="center"
             android:layout_alignParentTop="true"
@@ -41,40 +41,40 @@
         </ScrollView>
 
         <Button
-            android:text="Añadir Colección"
+            android:text="@string/addCollection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonAniadirColeccion"
+            android:id="@+id/buttonAddCollection"
             android:textAllCaps="false"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="162dp"
-            android:id="@+id/layoutAcciones">
+            android:id="@+id/layoutAcciones"
+            android:weightSum="1"
+            android:gravity="center">
 
             <Button
-                android:text="Añadir Elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonAniadirElemento"
-                android:layout_weight="1"
-                android:textAllCaps="false" />
+                android:text="@string/addElement"
+                android:layout_width="100dp"
+                android:layout_height="103dp"
+                android:id="@+id/buttonAddElement"
+                android:textAllCaps="false"/>
 
             <Button
-                android:text="Editar Diseño"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/editDesign"
+                android:layout_width="100dp"
+                android:layout_height="103dp"
                 android:id="@+id/buttonEditarDisenio"
-                android:layout_weight="1"
                 android:textAllCaps="false" />
 
             <Button
-                android:text="Explorar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/exploreCollection"
+                android:background="@drawable/custom_Button1"
+                android:layout_width="100dp"
+                android:layout_height="103dp"
                 android:id="@+id/buttonExplorar"
-                android:layout_weight="1"
                 android:textAllCaps="false"/>
         </LinearLayout>
 
