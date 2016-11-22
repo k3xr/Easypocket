@@ -23,7 +23,6 @@ public class ListaColeccion extends AppCompatActivity {
                 Button item = new Button(this);
                 String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
                 item.setText(collectionName);
-//                item.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT));
                 ll.addView(item);
             }
         } finally {

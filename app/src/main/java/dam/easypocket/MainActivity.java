@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button goToCollectionsButton = (Button)findViewById(R.id.goToCollectionList);
 
-
         goToCollectionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
