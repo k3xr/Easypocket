@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CrearOModifColeccion" />
-        <activity android:name=".ListaColeccion"></activity>
+        <activity android:name=".ListaColeccion" />
+        <activity android:name=".AddItem"></activity>
     </application>
 
 </manifest>
