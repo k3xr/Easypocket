@@ -2,14 +2,40 @@
     <string name="app_name">Easypocket</string>
     <string name="test">testString</string>
 
-    <string name="saveAndAddMore">Save and add more</string>
-    <string name="saveAndExit">Save and exit</string>
+    <!--ZONA NUEVOS ELEMENTOS 1c-->
+    <string name="saveAndAddMore_1c">Save and add more</string>
+    <string name="saveAndExit_1c">Save and exit</string>
+    <string name="add_Items_1c">Add Items</string>
+    <string name="nameColl_1c">Collection Name</string>
 
-    <!--ZONA LISTA_COLECCION-->
-    <string name="myCollection">My Collection</string>
-    <string name="addCollection">Add Collection</string>
-    <string name="addElement">Add Element</string>
-    <string name="editDesign">Edit Design</string>
-    <string name="exploreCollection">Explore Collection</string>
+    <!--ZONA LISTA_COLECCION 1a-->
+    <string name="myCollection_a1">My Collection</string>
+    <string name="addCollection_1a">Add Collection</string>
+    <string name="addElement_1a">Add Element</string>
+    <string name="editDesign_a1">Edit Design</string>
+    <string name="exploreCollection_a1">Explore Collection</string>
 
+    <!--ZONA CREAR Y EDITAR COLECCION 1b-->
+    <string name="createAndModifColl_1b">Create Or Edit Collection</string>
+    <string name="nameColl_1b">Collection name</string>
+    <string name="add_field_1b">Add Field</string>
+    <string name="save_and_exit_1b">Save And Exit</string>
+    <string name="cancel_and_exit_1b">Cancel And Exit</string>
+
+    <!--ZONA VISTA RESUMEN 1e-->
+    <string name="nameColl_1e">Collection Name</string>
+    <string name="summary_1e">Summary</string>
+    <string name="summaryButton_1e">Summary View</string>
+    <string name="work_View_1e">Work View</string>
+    <string name="deep_Search_1e">Deep Search</string>
+    <string name="myPockets_2a">My Pockets</string>
+    <string name="addPocket_2a">Add Pocket</string>
+    <string name="load_Pocket_2a">Load Pocket</string>
+    <string name="share_Manage_2a">Share and Manage Pocket</string>
+    <string name="searching_3a">Searching...</string>
+    <string name="searchButton_3a">Search...</string>
+    <string name="buttonAddFilter_3a">Add Filter</string>
+    <string name="results_3a">Results...</string>
+
+    <!--ZONA POCKETS 2a-->
 </resources>

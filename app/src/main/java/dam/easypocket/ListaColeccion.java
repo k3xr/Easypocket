@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+
+//hace referencia a la 1.a
 public class ListaColeccion extends AppCompatActivity {
 
     @Override

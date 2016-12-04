@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_lista_coleccion"
+    android:id="@+id/activity_pocket_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dam.easypocket.ListaColeccion">
+    tools:context="dam.easypocket.PocketList">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
-        android:id="@+id/layoutPrincipal_1a">
+        android:id="@+id/layoutPrincipal_2a">
 
         <TextView
-            android:text="@string/myCollection_a1"
+            android:text="@string/myPockets_2a"
             android:layout_width="371dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewMyCollection"
+            android:id="@+id/textViewMyPockets_2a"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:textAlignment="center"
             android:layout_alignParentTop="true"
@@ -32,51 +32,49 @@
             android:layout_width="match_parent"
             android:layout_height="129dp"
             android:layout_weight="1.21"
-            android:id="@+id/scrollColecciones">
+            android:id="@+id/scrollPockets_2a">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/linSV" />
+                android:id="@+id/linSV_2a" />
         </ScrollView>
 
         <Button
-            android:text="@string/addCollection_1a"
+            android:text="@string/addPocket_2a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonAddCollection"
+            android:id="@+id/buttonAddPocket_2a"
             android:textAllCaps="false"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="162dp"
-            android:id="@+id/layoutAcciones"
+            android:id="@+id/layoutAcciones_2a"
             android:weightSum="1"
             android:gravity="center">
 
             <Button
-                android:text="@string/addElement_1a"
-                android:layout_width="100dp"
+                android:text="@string/load_Pocket_2a"
+                android:layout_width="0dp"
                 android:layout_height="103dp"
-                android:id="@+id/buttonAddElement"
-                android:textAllCaps="false"/>
+                android:id="@+id/buttonLoadPocket_2a"
+                android:textAllCaps="false"
+                android:layout_weight=".50"/>
 
             <Button
-                android:text="@string/editDesign_a1"
-                android:layout_width="100dp"
+                android:text="@string/share_Manage_2a"
+                android:layout_width="0dp"
                 android:layout_height="103dp"
-                android:id="@+id/buttonEditarDisenio"
-                android:textAllCaps="false" />
+                android:id="@+id/buttonShareAndManage_2a"
+                android:textAllCaps="false"
+                android:layout_weight=".50"/>
 
-            <Button
-                android:text="@string/exploreCollection_a1"
-                android:layout_width="100dp"
-                android:layout_height="103dp"
-                android:id="@+id/buttonExplorar"
-                android:textAllCaps="false"/>
+
         </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>

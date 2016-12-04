@@ -20,7 +20,7 @@
         android:id="@+id/layoutPrincipal">
 
         <TextView
-            android:text="Crear/modificar Colección"
+            android:text="@string/createAndModifColl_1b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/misColecciones"
@@ -30,7 +30,7 @@
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:text="nombreColección"
+            android:text="@string/nameColl_1b"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/misColecciones"
@@ -55,9 +55,10 @@
         </ScrollView>
 
         <Button
-            android:text="Añadir Campo"
+            android:text="@string/add_field_1b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:id="@+id/buttonAddCampo" />
 
         <LinearLayout
@@ -67,7 +68,7 @@
             android:id="@+id/layoutAcciones">
 
             <Button
-                android:text="Guardar Y Salir"
+                android:text="@string/save_and_exit_1b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonGuardarYSalir"
@@ -75,7 +76,7 @@
                 android:textAllCaps="false" />
 
             <Button
-                android:text="Cancelar y salir"
+                android:text="@string/cancel_and_exit_1b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonCancelarYSalir"
