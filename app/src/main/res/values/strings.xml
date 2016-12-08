@@ -36,6 +36,12 @@
     <string name="searchButton_3a">Search...</string>
     <string name="buttonAddFilter_3a">Add Filter</string>
     <string name="results_3a">Results...</string>
+    <string name="title_activity_navigation_test">NavigationTest</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
     <!--ZONA POCKETS 2a-->
 </resources>

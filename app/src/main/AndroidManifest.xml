@@ -20,7 +20,11 @@
         <activity android:name=".AddItem" />
         <activity android:name=".SummaryVisual" />
         <activity android:name=".PocketList" />
-        <activity android:name=".DeepSearching"></activity>
+        <activity android:name=".DeepSearching" />
+        <activity
+            android:name=".NavigationTest"
+            android:label="@string/title_activity_navigation_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
