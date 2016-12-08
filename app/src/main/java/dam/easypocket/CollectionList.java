@@ -1,5 +1,6 @@
 package dam.easypocket;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
-public class NavigationTest extends AppCompatActivity
+public class CollectionList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -27,6 +30,22 @@ public class NavigationTest extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV);
+
+        CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
+        Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections",null);
+
+        try {
+            while (allCollectionsCursor.moveToNext()) {
+                Button item = new Button(this);
+                String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
+                item.setText(collectionName);
+                ll.addView(item);
+            }
+        } finally {
+            allCollectionsCursor.close();
+        }
     }
 
     @Override
