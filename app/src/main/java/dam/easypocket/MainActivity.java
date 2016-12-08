@@ -15,18 +15,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println(testCollectionsDB());
+        testCollectionsDB();
+        Intent intent = new Intent(MainActivity.this, ListaColeccion.class);
+        startActivity(intent);
 
-        Button goToCollectionsButton = (Button)findViewById(R.id.goToCollectionList);
-
-        goToCollectionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open new activity
-                Intent intent = new Intent(MainActivity.this, ListaColeccion.class);
-                startActivity(intent);
-            }
-        });
+//        System.out.println(testCollectionsDB());
+//
+//        Button goToCollectionsButton = (Button)findViewById(R.id.goToCollectionList);
+//
+//        goToCollectionsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Open new activity
+//                Intent intent = new Intent(MainActivity.this, ListaColeccion.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     /**
