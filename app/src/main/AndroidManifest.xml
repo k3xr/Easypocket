@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CrearOModifColeccion" />
+        <activity android:name=".EditCollection" />
         <activity android:name=".AddItem" />
         <activity android:name=".SummaryVisual" />
         <activity android:name=".PocketList" />

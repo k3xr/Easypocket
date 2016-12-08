@@ -8,9 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dam.easypocket.CrearOModifColeccion">
-
-
+    tools:context="dam.easypocket.EditCollection">
 
     <LinearLayout
         android:orientation="vertical"
