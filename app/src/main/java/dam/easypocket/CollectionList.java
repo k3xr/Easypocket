@@ -52,6 +52,7 @@ public class CollectionList extends AppCompatActivity
             public void onClick(View v) {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, AddItem.class);
+                intent.putExtra("currentCollectionSelected",currentCollectionSelected);
                 startActivity(intent);
             }
         });
@@ -62,6 +63,7 @@ public class CollectionList extends AppCompatActivity
             public void onClick(View v) {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, EditCollection.class);
+                intent.putExtra("currentCollectionSelected",currentCollectionSelected);
                 startActivity(intent);
             }
         });
@@ -72,6 +74,7 @@ public class CollectionList extends AppCompatActivity
             public void onClick(View v) {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, SummaryVisual.class);
+                intent.putExtra("currentCollectionSelected",currentCollectionSelected);
                 startActivity(intent);
             }
         });
@@ -99,9 +102,8 @@ public class CollectionList extends AppCompatActivity
                         addElement.setEnabled(true);
                         editDesign.setEnabled(true);
                         explore.setEnabled(true);
-                        //falta "cargar" el nombre de la colección actual (tabla) para pasársela luego a los botones al clickear
-                        //como coger el nombre del texto del boton actual que se acaba de hacer click?
-                        //currentCollectionSelected = ;
+                        Button currentB = (Button) v;
+                        currentCollectionSelected = currentB.getText().toString();
                     }
                 });
             }
