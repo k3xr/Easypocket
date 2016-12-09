@@ -19,6 +19,12 @@ import android.widget.LinearLayout;
 public class CollectionList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String currentCollectionSelected;
+    private String collectionName;
+
+    private Button addElement;
+    private Button editDesign;
+    private Button explore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +44,9 @@ public class CollectionList extends AppCompatActivity
 
         CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
 
-        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections", null)) {
-            while (allCollectionsCursor.moveToNext()) {
-                Button item = new Button(this);
-                String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
-                item.setText(collectionName);
-                ll.addView(item);
-            }
-        }
 
-        Button addElement = (Button)findViewById(R.id.buttonAddElement);
+
+        addElement = (Button)findViewById(R.id.buttonAddElement);
         addElement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,7 @@ public class CollectionList extends AppCompatActivity
             }
         });
 
-        Button editDesign = (Button)findViewById(R.id.buttonEditarDisenio);
+        editDesign = (Button)findViewById(R.id.buttonEditarDisenio);
         editDesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +66,7 @@ public class CollectionList extends AppCompatActivity
             }
         });
 
-        Button explore = (Button)findViewById(R.id.buttonExplorar);
+        explore = (Button)findViewById(R.id.buttonExplorar);
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +85,27 @@ public class CollectionList extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections", null)) {
+            while (allCollectionsCursor.moveToNext()) {
+                Button item = new Button(this);
+                collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
+                item.setText(collectionName);
+                ll.addView(item);
+
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addElement.setEnabled(true);
+                        editDesign.setEnabled(true);
+                        explore.setEnabled(true);
+                        //falta "cargar" el nombre de la colección actual (tabla) para pasársela luego a los botones al clickear
+                        //como coger el nombre del texto del boton actual que se acaba de hacer click?
+                        //currentCollectionSelected = ;
+                    }
+                });
+            }
+        }
     }
 
     @Override

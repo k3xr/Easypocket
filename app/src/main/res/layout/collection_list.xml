@@ -62,21 +62,24 @@
                 android:layout_width="100dp"
                 android:layout_height="103dp"
                 android:id="@+id/buttonAddElement"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:enabled="false"/>
 
             <Button
                 android:text="@string/editDesign_a1"
                 android:layout_width="100dp"
                 android:layout_height="103dp"
                 android:id="@+id/buttonEditarDisenio"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:enabled="false"/>
 
             <Button
                 android:text="@string/exploreCollection_a1"
                 android:layout_width="100dp"
                 android:layout_height="103dp"
                 android:id="@+id/buttonExplorar"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:enabled="false"/>
         </LinearLayout>
 
     </LinearLayout>
