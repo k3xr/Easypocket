@@ -38,7 +38,8 @@ public class EditCollection extends AppCompatActivity {
                 //String[] columnName = allCollectionsCursor.getColumnNames();
                 //String columnContent = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(columnName));
                 //String columnType = db.getDataTypeColumn(currentCollection, columnName);
-                item.setText(columnName[i]);
+                String currentDataType =  db.getDataTypeColumn(currentCollection,columnName[i]);
+                item.setText(columnName[i]+" "+ currentDataType);
                 scrollLayout_1b.addView(item);
                 i++;
                 /*item.setOnClickListener(new View.OnClickListener() {
