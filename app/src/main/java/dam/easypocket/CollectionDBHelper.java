@@ -214,4 +214,10 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         return true;
     }
 
+    String getDataTypeColumn(String collectionName, String columnName){
+
+        Cursor NameSearcher = db.rawQuery("select typeof (" + columnName + ") from " + collectionName, null);
+        return NameSearcher.getString(0);
+    }
+
 }
