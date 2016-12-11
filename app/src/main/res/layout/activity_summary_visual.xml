@@ -11,13 +11,14 @@
     tools:context="dam.easypocket.SummaryVisual">
 
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
-        android:id="@+id/layoutPrincipal_1e">
+        android:id="@+id/layoutPrincipal_1e"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:text="@string/nameColl_1e"
