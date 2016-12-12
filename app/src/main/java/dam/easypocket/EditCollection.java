@@ -1,5 +1,6 @@
 package dam.easypocket;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
@@ -27,7 +28,13 @@ public class EditCollection extends BaseActivity
     private ArrayList<String> addedColumnsName;
     private ArrayList<String> addedColumnstype;
 
+    private ArrayList<Integer> idEditText;
+
+    private Button buttonGuardarYSalir;
+    private Button buttonCancelarYSalir;
+
     private Button addField;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +52,17 @@ public class EditCollection extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        addedColumnsName = new ArrayList<String>();
+        idEditText = new ArrayList<Integer>();
+
         currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
 
         currentNameCollection = (TextView)findViewById(R.id.nombreColeccion);
         currentNameCollection.setText(currentCollection);
 
         addField = (Button) findViewById(R.id.buttonAddCampo_1b);
+        buttonGuardarYSalir = (Button) findViewById(R.id.buttonGuardarYSalir_1b);
+        buttonCancelarYSalir = (Button) findViewById(R.id.buttonCancelarYSalir_1b);
 
         db = new CollectionDBHelper(this.getApplicationContext());
 
@@ -91,6 +103,31 @@ public class EditCollection extends BaseActivity
                 generaNuevoFormulario();
             }
         });
+
+        buttonGuardarYSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                recogeEntradasNuevasColumnas();
+
+                if(addedColumnsName!=null) {
+                    for (int i = 0; i < addedColumnsName.size(); i++) {
+                        db.addColumn(currentNameCollection.getText().toString(), addedColumnsName.get(i));
+                    }
+                }
+                Intent intent = new Intent(EditCollection.this, CollectionList.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonCancelarYSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollLayout_1b.removeView((View)v.getParent());
+                Intent intent = new Intent(EditCollection.this, CollectionList.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean generaNuevoFormulario(){
@@ -100,6 +137,13 @@ public class EditCollection extends BaseActivity
         TextView TittleForm = new TextView(this);
         EditText entradaNombre = new EditText(this);
         Button cancelarOperacion = new Button(this);
+
+        //no genera un ID por defecto, hay que asignarselo??
+        //idEditText.add(entradaNombre.getId());
+        //prueba, da -1
+        //entradaNombre.setText((Integer.toString(entradaNombre.getId())));
+
+        //se podría usar setID? genera conflictos con otros ID puestos anteriormente?
 
         cancelarOperacion.setText("Cancel");
         TittleForm.setText("Write: ");
@@ -114,10 +158,22 @@ public class EditCollection extends BaseActivity
         cancelarOperacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //idEditText.remove(0);
+                //View viewPadre = (View)v.getParent();
                 scrollLayout_1b.removeView((View)v.getParent());
             }
         });
+        return true;
+    }
 
+    private boolean recogeEntradasNuevasColumnas(){
+        if(idEditText!=null){
+            if(idEditText.size()>0){
+                for(int i = 0; i < idEditText.size();i++) {
+                    addedColumnsName.add(((EditText)findViewById(idEditText.get(i))).getEditableText().toString());
+                }
+            }
+        }
         return true;
     }
 }

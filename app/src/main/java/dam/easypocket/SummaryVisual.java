@@ -20,8 +20,9 @@ public class SummaryVisual extends AppCompatActivity {
 
         currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
         db = new CollectionDBHelper(this.getApplicationContext());
-        
+
         LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
+        ll.removeAllViews();
 
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
 
@@ -38,6 +39,36 @@ public class SummaryVisual extends AppCompatActivity {
             }
         }
         catch(Exception e){
+            ll.removeAllViews();
+            System.out.print("Tabla sin columnas");
+        }
+    }
+
+    protected void onResume(){
+        super.onResume();
+
+        currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
+        db = new CollectionDBHelper(this.getApplicationContext());
+
+        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
+
+        ll.removeAllViews();
+        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
+
+            while (allCollectionsCursor.moveToNext()) {
+                LinearLayout filaContenedor = new LinearLayout(this);
+                TextView item = new TextView(this);
+
+                String rawData = allCollectionsCursor.getString(0);
+
+                item.setText(rawData);
+
+                filaContenedor.addView(item);
+                ll.addView(filaContenedor);
+            }
+        }
+        catch(Exception e){
+            ll.removeAllViews();
             System.out.print("Tabla sin columnas");
         }
     }

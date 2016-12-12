@@ -43,6 +43,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="logo">Logo</string>
+    <string name="cancelAction_1d">Cancel without saving</string>
 
     <!--ZONA POCKETS 2a-->
 </resources>

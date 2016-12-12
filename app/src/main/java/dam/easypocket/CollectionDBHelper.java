@@ -221,4 +221,11 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         return NameSearcher.getString(0);
     }
 
+    boolean addColumn(String collectionName, String columnName){
+
+        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
+        db.execSQL(query);
+        return true;
+    }
+
 }
