@@ -59,7 +59,7 @@
 
                 <TextView
                     android:text="@string/nameColl_1b"
-                    android:layout_width="363dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/misColecciones"
                     android:layout_centerHorizontal="true"
