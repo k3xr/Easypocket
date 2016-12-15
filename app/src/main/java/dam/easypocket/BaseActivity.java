@@ -57,8 +57,9 @@ public class BaseActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_collections) {
-            Intent intent = new Intent(this, CollectionList.class);
-            startActivity(intent);
+            Intent openCollectionList= new Intent(this, CollectionList.class);
+            openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(openCollectionList);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
