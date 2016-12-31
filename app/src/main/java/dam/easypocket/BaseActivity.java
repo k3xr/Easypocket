@@ -44,6 +44,9 @@ public class BaseActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent openCollectionList= new Intent(this, SettingsActivity.class);
+            openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(openCollectionList);
             return true;
         }
 

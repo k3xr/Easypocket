@@ -19,7 +19,7 @@
 
         <TextView
             android:text="@string/myPockets_2a"
-            android:layout_width="371dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMyPockets_2a"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"

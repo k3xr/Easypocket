@@ -1,9 +1,11 @@
 package dam.easypocket;
 
+import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ public class SummaryVisual extends AppCompatActivity {
 
     private String currentCollection;
     private CollectionDBHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +25,20 @@ public class SummaryVisual extends AppCompatActivity {
         db = new CollectionDBHelper(this.getApplicationContext());
 
         LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
+        TextView collectionName = (TextView) findViewById(R.id.myCollection_1e);
+        collectionName.setText(currentCollection.toUpperCase());
         ll.removeAllViews();
+
+        Button toDeepSearch = (Button) findViewById(R.id.buttonDeepSearch_1e);
+        toDeepSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open new activity
+                Intent openCollectionList = new Intent(SummaryVisual.this, DeepSearching.class);
+                openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(openCollectionList);
+            }
+        });
 
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
 
