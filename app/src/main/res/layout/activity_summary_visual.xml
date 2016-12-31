@@ -1,84 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_summary_visual"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dam.easypocket.SummaryVisual">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1"
-        android:id="@+id/layoutPrincipal_1e"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:fitsSystemWindows="true"
+        tools:context="dam.easypocket.SummaryVisual">
 
-        <TextView
-            android:text="@string/nameColl_1e"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/myCollection_1e"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tools:textAlignment="center"/>
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView
-            android:text="@string/summary_1e"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/summary_1e"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="30sp"
-            android:textStyle="normal|bold"
-            android:textAlignment="center" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="129dp"
-            android:layout_weight="1.21"
-            android:id="@+id/scroll_1e">
-
-            <LinearLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/linSV_1e" />
-        </ScrollView>
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        </android.support.design.widget.AppBarLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="162dp"
-            android:id="@+id/layoutAcciones_1e"
-            android:weightSum="1"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
-            <Button
-                android:text="@string/summaryButton_1e"
-                android:layout_width="100dp"
-                android:layout_height="103dp"
-                android:id="@+id/buttonSummaryView_1e"
-                android:textAllCaps="false"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:id="@+id/layoutPrincipal_1e"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
 
-            <Button
-                android:text="@string/work_View_1e"
-                android:layout_width="100dp"
-                android:layout_height="103dp"
-                android:id="@+id/buttonWorkView_1e"
-                android:textAllCaps="false" />
+                <TextView
+                    android:text="@string/nameColl_1e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/myCollection_1e"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    tools:textAlignment="center"/>
 
-            <Button
-                android:text="@string/deep_Search_1e"
-                android:layout_width="100dp"
-                android:layout_height="103dp"
-                android:id="@+id/buttonDeepSearch_1e"
-                android:textAllCaps="false"/>
-        </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+                <TextView
+                    android:text="@string/summary_1e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/summary_1e"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="center" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="129dp"
+                    android:layout_weight="1.21"
+                    android:id="@+id/scroll_1e">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/linSV_1e" />
+                </ScrollView>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="162dp"
+                    android:id="@+id/layoutAcciones_1e"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:text="@string/summaryButton_1e"
+                        android:layout_width="100dp"
+                        android:layout_height="103dp"
+                        android:id="@+id/buttonSummaryView_1e"
+                        android:textAllCaps="false"/>
+
+                    <Button
+                        android:text="@string/work_View_1e"
+                        android:layout_width="100dp"
+                        android:layout_height="103dp"
+                        android:id="@+id/buttonWorkView_1e"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:text="@string/deep_Search_1e"
+                        android:layout_width="100dp"
+                        android:layout_height="103dp"
+                        android:id="@+id/buttonDeepSearch_1e"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation_test"
+        app:menu="@menu/activity_navigation_test_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
