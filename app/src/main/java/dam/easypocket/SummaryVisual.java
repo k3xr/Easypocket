@@ -27,6 +27,7 @@ public class SummaryVisual extends AppCompatActivity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
         TextView collectionName = (TextView) findViewById(R.id.myCollection_1e);
         collectionName.setText(currentCollection.toUpperCase());
+        collectionName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         ll.removeAllViews();
 
         Button toDeepSearch = (Button) findViewById(R.id.buttonDeepSearch_1e);

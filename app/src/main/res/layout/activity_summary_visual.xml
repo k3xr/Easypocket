@@ -32,16 +32,13 @@
             android:text="@string/summary_1e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/misColecciones"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp"
             android:id="@+id/summary_1e"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="30sp"
             android:textStyle="normal|bold"
             android:textAlignment="center" />
 
-       <ScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="129dp"
             android:layout_weight="1.21"
