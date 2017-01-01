@@ -2,6 +2,8 @@ package dam.easypocket;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -100,6 +102,17 @@ public class CollectionList extends BaseActivity {
                         editDesign.setEnabled(true);
                         explore.setEnabled(true);
                         Button currentB = (Button) v;
+
+                        LinearLayout lay = (LinearLayout) findViewById(R.id.linSV);
+
+                        for (int i = 0; i < lay.getChildCount(); i++) {
+                            View collection = lay.getChildAt(i);
+                            if (collection instanceof Button) {
+                                Button buttonCol = (Button) collection;
+                                buttonCol.getBackground().clearColorFilter();
+                            }
+                        }
+                        currentB.getBackground().setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
                         currentCollectionSelected = currentB.getText().toString();
                     }
                 });
