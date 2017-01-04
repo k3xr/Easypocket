@@ -78,6 +78,42 @@ public class AddItem extends AppCompatActivity {
             System.out.print("Tabla sin columnas");
         }
 
+        saveAndContButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1d);
+
+                ArrayList<String> fieldsCollector = new ArrayList<String>();
+
+                for (int i = 0; i < lay.getChildCount(); i++) {
+
+                    LinearLayout segundoIter = (LinearLayout)lay.getChildAt(i);
+                    for(int j = 0; j < segundoIter.getChildCount(); j++){
+
+                        View collection = segundoIter.getChildAt(j);
+
+                        //Log.d("Prueba0", "contenido: "+collection.getClass());
+                        if (collection instanceof EditText) {
+                            EditText datoGuarda = (EditText) collection;
+                            fieldsCollector.add(datoGuarda.getText().toString());
+                            datoGuarda.setText("");
+                            //System.out.print("dentro del if del bucle");
+                            //Log.d("Prueba1", "Dentro del bucle y del if");
+                        }
+                    }
+                }
+
+                //System.out.print("fuera del bucle");
+                //Log.d("Prueba2", "Fuera del bucle y del if");
+                //Log.d("Prueba3", "Tamaño campos: "+fieldsCollector.size());
+                String[] fieldsCollected = new String[fieldsCollector.size()];
+                fieldsCollected = fieldsCollector.toArray(fieldsCollected);
+
+                db.insertToCollection(currentCollection, fieldsCollected);
+
+            }
+        });
+
 
         saveAndExitButton.setOnClickListener(new View.OnClickListener() {
             @Override
