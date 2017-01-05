@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,14 +109,47 @@ public class EditCollection extends BaseActivity
             @Override
             public void onClick(View v) {
 
-                recogeEntradasNuevasColumnas();
+                //recogeEntradasNuevasColumnas();
 
+                /*
                 if(addedColumnsName!=null) {
                     for (int i = 0; i < addedColumnsName.size(); i++) {
                         db.addColumn(currentNameCollection.getText().toString(), addedColumnsName.get(i));
                     }
+                }*/
+
+
+                LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1b);
+
+                ArrayList<String> fieldsCollector = new ArrayList<String>();
+
+                for (int i = 0; i < lay.getChildCount(); i++) {
+
+                    LinearLayout segundoIter = (LinearLayout)lay.getChildAt(i);
+                    for(int j = 0; j < segundoIter.getChildCount(); j++){
+
+                        View collection = segundoIter.getChildAt(j);
+
+                        //Log.d("Prueba0", "contenido: "+collection.getClass());
+                        if (collection instanceof EditText) {
+                            EditText datoGuarda = (EditText) collection;
+                            fieldsCollector.add(datoGuarda.getText().toString());
+                            //System.out.print("dentro del if del bucle");
+                            //Log.d("Prueba1", "Agrego la siguiente columna: "+fieldsCollector.get(0).toString());
+                        }
+                    }
                 }
+
+                //System.out.print("fuera del bucle");
+                //Log.d("Prueba2", "Fuera del bucle y del if");
+                //Log.d("Prueba3", "Tamaño campos: "+fieldsCollector.size());
+                String[] fieldsCollected = new String[fieldsCollector.size()];
+                fieldsCollected = fieldsCollector.toArray(fieldsCollected);
+                //Log.d("Prueba2", "Current Collection: "+ currentCollection);
+                db.addColumnToCollection(currentCollection, fieldsCollected);
+
                 Intent intent = new Intent(EditCollection.this, CollectionList.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -165,7 +199,7 @@ public class EditCollection extends BaseActivity
         });
         return true;
     }
-
+/*
     private boolean recogeEntradasNuevasColumnas(){
         if(idEditText!=null){
             if(idEditText.size()>0){
@@ -175,5 +209,5 @@ public class EditCollection extends BaseActivity
             }
         }
         return true;
-    }
+    }*/
 }

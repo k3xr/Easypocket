@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
 
@@ -210,6 +211,28 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
 
         String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
         db.execSQL(query);
+
+        return true;
+    }
+
+    boolean addColumnToCollection (String collectionName, String[] values){
+        if (values.length == 0){
+            return false;
+        }
+
+        //String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
+        String valuesFormatted = "";
+
+        for (String value : values) {
+            //valuesFormatted = "'" + value + "'";
+            String query = "ALTER TABLE "+collectionName+" ADD COLUMN "+value+" "+"TEXT"+";";
+            //Log.d("Prueba3", "Current to add: "+ value);
+            //Log.d("Prueba3", "Current query: "+ query);
+            db.execSQL(query);
+        }
+
+        //String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
+
 
         return true;
     }
