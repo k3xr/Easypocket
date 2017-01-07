@@ -57,20 +57,23 @@
 
         <Button
             android:text="@string/saveAndAddMore_1c"
-            android:layout_width="112dp"
-            android:layout_height="58dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".33"
             android:id="@+id/saveMoreButton_1d" />
 
         <Button
             android:text="@string/saveAndExit_1c"
-            android:layout_width="104dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".33"
             android:id="@+id/saveAndExitButton_1d" />
 
         <Button
             android:text="@string/cancel"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".33"
             android:id="@+id/cancelButton_1d" />
     </LinearLayout>
 
