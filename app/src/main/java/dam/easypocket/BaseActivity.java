@@ -13,8 +13,7 @@ import android.view.MenuItem;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -63,16 +62,10 @@ public class BaseActivity extends AppCompatActivity
             Intent openCollectionList= new Intent(this, CollectionList.class);
             openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(openCollectionList);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Intent openCollectionList= new Intent(this, SettingsActivity.class);
+            openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(openCollectionList);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
