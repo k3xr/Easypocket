@@ -90,14 +90,16 @@
                         android:layout_width="100dp"
                         android:layout_height="103dp"
                         android:id="@+id/buttonSummaryView_1e"
-                        android:textAllCaps="false"/>
+                        android:textAllCaps="false"
+                        android:enabled="false"/>
 
                     <Button
                         android:text="@string/work_View_1e"
                         android:layout_width="100dp"
                         android:layout_height="103dp"
                         android:id="@+id/buttonWorkView_1e"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:enabled="false"/>
 
                     <Button
                         android:text="@string/deep_Search_1e"
