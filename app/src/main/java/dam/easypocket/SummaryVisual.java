@@ -36,17 +36,6 @@ public class SummaryVisual extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
-
-        TextView collectionName = (TextView) findViewById(R.id.summary_1e);
-        if (currentCollection != null) {
-            collectionName.setText(currentCollection.toUpperCase());
-        }
-        else {
-            collectionName.setText(R.string.summary);
-        }
-        collectionName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
         Button toDeepSearch = (Button) findViewById(R.id.buttonDeepSearch_1e);
         toDeepSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +54,15 @@ public class SummaryVisual extends BaseActivity
 
         String currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
         CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
+
+        TextView collectionName = (TextView) findViewById(R.id.summary_1e);
+        if (currentCollection != null) {
+            collectionName.setText(currentCollection.toUpperCase());
+        }
+        else {
+            collectionName.setText(R.string.summary);
+        }
+        collectionName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         TableLayout stk = (TableLayout) findViewById(R.id.table_main);
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+ currentCollection, null)) {

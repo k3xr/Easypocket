@@ -51,6 +51,7 @@ public class CollectionList extends BaseActivity {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, AddItem.class);
                 intent.putExtra("currentCollectionSelected",currentCollectionSelected);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -62,6 +63,7 @@ public class CollectionList extends BaseActivity {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, EditCollection.class);
                 intent.putExtra("currentCollectionSelected",currentCollectionSelected);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -73,6 +75,7 @@ public class CollectionList extends BaseActivity {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, SummaryVisual.class);
                 intent.putExtra("currentCollectionSelected",currentCollectionSelected);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -83,6 +86,7 @@ public class CollectionList extends BaseActivity {
             public void onClick(View v) {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, EditCollection.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });

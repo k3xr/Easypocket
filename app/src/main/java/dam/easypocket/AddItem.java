@@ -150,6 +150,7 @@ public class AddItem extends AppCompatActivity {
             public void onClick(View v) {
                 //scrollLayout_1b.removeView((View)v.getParent());
                 Intent intent = new Intent(AddItem.this, CollectionList.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });

@@ -145,6 +145,7 @@ public class EditCollection extends BaseActivity
             public void onClick(View v) {
                 scrollLayout_1b.removeView((View)v.getParent());
                 Intent intent = new Intent(EditCollection.this, CollectionList.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
