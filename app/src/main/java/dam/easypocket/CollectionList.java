@@ -111,7 +111,7 @@ public class CollectionList extends BaseActivity {
                                 buttonCol.getBackground().clearColorFilter();
                             }
                         }
-                        currentB.getBackground().setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
+                        currentB.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
                         currentCollectionSelected = currentB.getText().toString();
                     }
                 });

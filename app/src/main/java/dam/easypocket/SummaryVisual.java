@@ -2,23 +2,23 @@ package dam.easypocket;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
 //hace referencia a la 1.e
 public class SummaryVisual extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private String currentCollection;
-    private CollectionDBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,16 @@ public class SummaryVisual extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
-        db = new CollectionDBHelper(this.getApplicationContext());
+        String currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
-        TextView collectionName = (TextView) findViewById(R.id.myCollection_1e);
-        collectionName.setText(currentCollection.toUpperCase());
+        TextView collectionName = (TextView) findViewById(R.id.summary_1e);
+        if (currentCollection != null) {
+            collectionName.setText(currentCollection.toUpperCase());
+        }
+        else {
+            collectionName.setText(R.string.summary);
+        }
         collectionName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        ll.removeAllViews();
 
         Button toDeepSearch = (Button) findViewById(R.id.buttonDeepSearch_1e);
         toDeepSearch.setOnClickListener(new View.OnClickListener() {
@@ -56,51 +58,57 @@ public class SummaryVisual extends BaseActivity
             }
         });
 
-        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
-
-            while (allCollectionsCursor.moveToNext()) {
-                LinearLayout filaContenedor = new LinearLayout(this);
-                TextView item = new TextView(this);
-
-                String rawData = allCollectionsCursor.getString(0);
-
-                item.setText(rawData);
-
-                filaContenedor.addView(item);
-                ll.addView(filaContenedor);
-            }
-        }
-        catch(Exception e){
-            ll.removeAllViews();
-            System.out.print("Tabla sin columnas");
-        }
     }
 
     protected void onResume(){
         super.onResume();
 
-        currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
-        db = new CollectionDBHelper(this.getApplicationContext());
+        String currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
+        CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV_1e);
+        TableLayout stk = (TableLayout) findViewById(R.id.table_main);
+        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+ currentCollection, null)) {
+            stk.removeAllViews();
+            String[] columnNames = allCollectionsCursor.getColumnNames();
 
-        ll.removeAllViews();
-        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
+            TableRow.LayoutParams tableRowParams =
+                    new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.WRAP_CONTENT);
 
-            while (allCollectionsCursor.moveToNext()) {
-                LinearLayout filaContenedor = new LinearLayout(this);
-                TextView item = new TextView(this);
+            int leftMargin = 15;
+            int topMargin = 0;
+            int rightMargin = 15;
+            int bottomMargin = 0;
 
-                String rawData = allCollectionsCursor.getString(0);
+            tableRowParams.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
 
-                item.setText(rawData);
-
-                filaContenedor.addView(item);
-                ll.addView(filaContenedor);
+            TableRow tbrow0 = new TableRow(this);
+            for (String columnName : columnNames) {
+                TextView tv0 = new TextView(this);
+                tv0.setText(columnName);
+                tv0.setTextColor(Color.WHITE);
+                tv0.setTextSize(20.0f);
+                tv0.setLayoutParams(tableRowParams);
+                tbrow0.addView(tv0);
             }
+            tbrow0.setBackgroundResource(R.drawable.row_border);
+            stk.addView(tbrow0);
+            while (allCollectionsCursor.moveToNext()) {
+                TableRow tbrow1 = new TableRow(this);
+                for (int i = 0; i < columnNames.length; i++) {
+                    TextView tv0 = new TextView(this);
+                    tv0.setText(allCollectionsCursor.getString(i));
+                    tv0.setTextColor(Color.WHITE);
+                    tv0.setGravity(Gravity.CENTER);
+                    tbrow1.addView(tv0);
+                }
+                tbrow1.setBackgroundResource(R.drawable.row_border);
+                tbrow1.setLayoutParams(tableRowParams);
+                stk.addView(tbrow1);
+            }
+            stk.setBackgroundColor(Color.DKGRAY);
         }
         catch(Exception e){
-            ll.removeAllViews();
+            stk.removeAllViews();
             System.out.print("Tabla sin columnas");
         }
     }
