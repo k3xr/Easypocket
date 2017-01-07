@@ -17,7 +17,6 @@ import android.widget.TextView;
 public class CollectionList extends BaseActivity {
 
     private String currentCollectionSelected;
-    private String collectionName;
 
     private Button addElement;
     private Button editDesign;
@@ -91,7 +90,7 @@ public class CollectionList extends BaseActivity {
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections", null)) {
             while (allCollectionsCursor.moveToNext()) {
                 Button item = new Button(this);
-                collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
+                String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
                 item.setText(collectionName);
                 ll.addView(item);
 
@@ -182,7 +181,7 @@ public class CollectionList extends BaseActivity {
         Cursor resultSet = db.getDb().rawQuery("Select * from books",null);
         resultSet.moveToFirst();
 
-        TextView text = (TextView)findViewById(R.id.misColecciones);
+//        TextView text = (TextView)findViewById(R.id.misColecciones);
 
         for(int i = 0; i < resultSet.getCount(); i++){
             resultSet.moveToPosition(i);

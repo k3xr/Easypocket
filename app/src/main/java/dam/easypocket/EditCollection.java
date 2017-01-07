@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,20 +21,13 @@ public class EditCollection extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private String currentCollection;
-    private TextView currentNameCollection;
     private CollectionDBHelper db;
     private LinearLayout scrollLayout_1b;
 
     private ArrayList<String> addedColumnsName;
-    private ArrayList<String> addedColumnstype;
+//    private ArrayList<String> addedColumnstype;
 
     private ArrayList<Integer> idEditText;
-
-    private Button buttonGuardarYSalir;
-    private Button buttonCancelarYSalir;
-
-    private Button addField;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +45,17 @@ public class EditCollection extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        addedColumnsName = new ArrayList<String>();
-        idEditText = new ArrayList<Integer>();
+        addedColumnsName = new ArrayList<>();
+        idEditText = new ArrayList<>();
 
         currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
 
-        currentNameCollection = (TextView)findViewById(R.id.nombreColeccion);
+        TextView currentNameCollection = (TextView) findViewById(R.id.nombreColeccion);
         currentNameCollection.setText(currentCollection);
 
-        addField = (Button) findViewById(R.id.buttonAddCampo_1b);
-        buttonGuardarYSalir = (Button) findViewById(R.id.buttonGuardarYSalir_1b);
-        buttonCancelarYSalir = (Button) findViewById(R.id.buttonCancelarYSalir_1b);
+        Button addField = (Button) findViewById(R.id.buttonAddCampo_1b);
+        Button buttonGuardarYSalir = (Button) findViewById(R.id.buttonGuardarYSalir_1b);
+        Button buttonCancelarYSalir = (Button) findViewById(R.id.buttonCancelarYSalir_1b);
 
         db = new CollectionDBHelper(this.getApplicationContext());
 
@@ -79,12 +71,7 @@ public class EditCollection extends BaseActivity
                 String currentDataType =  db.getDataTypeColumn(currentCollection,columnName[i]);
                 item.setText(columnName[i]);
 
-                if (Build.VERSION.SDK_INT < 23) {
-
-                    item.setTextAppearance(this, android.R.style.TextAppearance);
-
-                } else {
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     item.setTextAppearance(android.R.style.TextAppearance);
                 }
                 itemType.setText(currentDataType);
@@ -118,10 +105,9 @@ public class EditCollection extends BaseActivity
                     }
                 }*/
 
-
                 LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1b);
 
-                ArrayList<String> fieldsCollector = new ArrayList<String>();
+                ArrayList<String> fieldsCollector = new ArrayList<>();
 
                 for (int i = 0; i < lay.getChildCount(); i++) {
 
@@ -179,8 +165,8 @@ public class EditCollection extends BaseActivity
 
         //se podría usar setID? genera conflictos con otros ID puestos anteriormente?
 
-        cancelarOperacion.setText("Cancel");
-        TittleForm.setText("Write: ");
+        cancelarOperacion.setText(R.string.cancel);
+        TittleForm.setText(R.string.write);
         entradaNombre.setMaxWidth(600);
         entradaNombre.setMinWidth(400);
 

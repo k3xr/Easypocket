@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
 
@@ -220,8 +219,8 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
             return false;
         }
 
-        //String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
-        String valuesFormatted = "";
+//        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
+//        String valuesFormatted = "";
 
         for (String value : values) {
             //valuesFormatted = "'" + value + "'";
@@ -231,24 +230,23 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
             db.execSQL(query);
         }
 
-        //String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
-
+//        String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
 
         return true;
     }
 
     String getDataTypeColumn(String collectionName, String columnName){
-
-        Cursor NameSearcher = db.rawQuery("select typeof (" + columnName + ") from " + collectionName, null);
-        NameSearcher.moveToFirst();
-        return NameSearcher.getString(0);
+        Cursor nameSearcher = db.rawQuery("select typeof (" + columnName + ") from " + collectionName, null);
+        nameSearcher.moveToFirst();
+        String colDataType = nameSearcher.getString(0);
+        nameSearcher.close();
+        return colDataType;
     }
 
-    boolean addColumn(String collectionName, String columnName){
-
-        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
-        db.execSQL(query);
-        return true;
-    }
+//    boolean addColumn(String collectionName, String columnName){
+//        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
+//        db.execSQL(query);
+//        return true;
+//    }
 
 }

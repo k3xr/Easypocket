@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +17,7 @@ import java.util.ArrayList;
 public class AddItem extends AppCompatActivity {
 
     private String currentCollection;
-    private TextView currentNameCollection;
     private CollectionDBHelper db;
-    private LinearLayout scrollLayout_1d;
 
     Button saveAndExitButton;
     Button saveAndContButton;
@@ -37,14 +34,12 @@ public class AddItem extends AppCompatActivity {
 
         currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
 
-        currentNameCollection = (TextView)findViewById(R.id.nombreColeccion);
+        TextView currentNameCollection = (TextView) findViewById(R.id.nombreColeccion);
         currentNameCollection.setText(currentCollection);
 
         db = new CollectionDBHelper(this.getApplicationContext());
 
-        scrollLayout_1d = (LinearLayout) findViewById(R.id.llCampos_1d);
-
-
+        LinearLayout scrollLayout_1d = (LinearLayout) findViewById(R.id.llCampos_1d);
 
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
             String[] columnName = allCollectionsCursor.getColumnNames();
@@ -57,12 +52,7 @@ public class AddItem extends AppCompatActivity {
                 //String currentDataType =  db.getDataTypeColumn(currentCollection,columnName[i]);
                 item.setText(columnName[i]);
 
-                if (Build.VERSION.SDK_INT < 23) {
-
-                    item.setTextAppearance(this, android.R.style.TextAppearance);
-
-                } else {
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     item.setTextAppearance(android.R.style.TextAppearance);
                 }
                 //entradaDatos.setText(currentDataType);
@@ -83,7 +73,7 @@ public class AddItem extends AppCompatActivity {
             public void onClick(View v) {
                 LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1d);
 
-                ArrayList<String> fieldsCollector = new ArrayList<String>();
+                ArrayList<String> fieldsCollector = new ArrayList<>();
 
                 for (int i = 0; i < lay.getChildCount(); i++) {
 
@@ -122,7 +112,7 @@ public class AddItem extends AppCompatActivity {
 
                 LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1d);
 
-                ArrayList<String> fieldsCollector = new ArrayList<String>();
+                ArrayList<String> fieldsCollector = new ArrayList<>();
 
                 for (int i = 0; i < lay.getChildCount(); i++) {
 
