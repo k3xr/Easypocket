@@ -59,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonAddCollection"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:enabled="false"/>
 
         <TextView
             android:text="@string/results_3a"

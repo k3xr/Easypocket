@@ -41,9 +41,11 @@ public class SummaryVisual extends BaseActivity
             @Override
             public void onClick(View v) {
                 // Open new activity
-                Intent openCollectionList = new Intent(SummaryVisual.this, DeepSearching.class);
-                openCollectionList.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(openCollectionList);
+                String currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
+                Intent intent = new Intent(SummaryVisual.this, DeepSearching.class);
+                intent.putExtra("currentCollectionSelected",currentCollection);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
 

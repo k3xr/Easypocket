@@ -243,6 +243,16 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
         return colDataType;
     }
 
+    /**
+     * Retrieves items in a collection which name matches the given string
+     * @param name pattern to search in the collection
+     * @param collection collection name
+     * @return cursor with the results of the search
+     */
+//    Cursor getResults(String name, String collection) {
+//        return db.rawQuery("select * from " + collection + " where ", null);
+//    }
+
 //    boolean addColumn(String collectionName, String columnName){
 //        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
 //        db.execSQL(query);
