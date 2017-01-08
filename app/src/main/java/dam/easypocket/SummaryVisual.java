@@ -88,6 +88,7 @@ public class SummaryVisual extends BaseActivity
                 tv0.setTextColor(Color.WHITE);
                 tv0.setTextSize(20.0f);
                 tv0.setLayoutParams(tableRowParams);
+                tv0.setGravity(Gravity.CENTER);
                 tbrow0.addView(tv0);
             }
             tbrow0.setBackgroundResource(R.drawable.row_border);

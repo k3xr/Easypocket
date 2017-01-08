@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class CollectionList extends BaseActivity {
 
@@ -134,9 +133,9 @@ public class CollectionList extends BaseActivity {
         db.deleteCollection("suitcase");
 
         String[] columns = new String[3];
-        columns[0] = "column1";
-        columns[1] = "column2";
-        columns[2] = "column3";
+        columns[0] = "title";
+        columns[1] = "pages";
+        columns[2] = "owned";
 
         String[] columnTypes = new String[3];
         columnTypes[0] = "VARCHAR";
@@ -165,33 +164,63 @@ public class CollectionList extends BaseActivity {
 
         boolean cond4 = collectionName.equals("books");
 
-        String[] values = {"book1", "40", "1"};
+        String[] values = {"The Hunger Games", "40", "1"};
         db.insertToCollection("books", values);
-        values = new String[]{"book1", "540", "1"};
+        values = new String[]{"Harry Potter", "540", "1"};
         db.insertToCollection("books", values);
-        values = new String[]{"book2", "6540", "0"};
+        values = new String[]{"Pride and Prejudice", "6540", "0"};
         db.insertToCollection("books", values);
-        values = new String[]{"book3", "4350", "1"};
+        values = new String[]{"Twilight", "4350", "1"};
         db.insertToCollection("books", values);
-        values = new String[]{"book4", "40436", "1"};
+        values = new String[]{"The Book Thief", "40436", "1"};
         db.insertToCollection("books", values);
-        values = new String[]{"book5", "403", "0"};
+        values = new String[]{"Animal Farm", "403", "0"};
         db.insertToCollection("books", values);
-        values = new String[]{"book6", "40654", "0"};
+        values = new String[]{"The Da Vinci Code", "40654", "0"};
         db.insertToCollection("books", values);
-        values = new String[]{"book7", "440", "1"};
+        values = new String[]{"Divergent", "440", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"Romeo and Juliet", "4890", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Alchemist", "4420", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"City of Bones", "440", "0"};
+        db.insertToCollection("books", values);
+        values = new String[]{"Dracula", "460", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Secret Garden", "40", "0"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Princess Bride", "940", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Stand", "9460", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"Dune", "96", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"A Game of Thrones", "966", "0"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Odyssey", "660", "0"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Little Prince", "960", "1"};
+        db.insertToCollection("books", values);
+        values = new String[]{"The Lovely Bones", "10", "0"};
         db.insertToCollection("books", values);
 
-        Cursor resultSet = db.getDb().rawQuery("Select * from books",null);
-        resultSet.moveToFirst();
+//        Cursor resultSet = db.getDb().rawQuery("Select * from books",null);
+//        resultSet.moveToFirst();
+//
+//        for(int i = 0; i < resultSet.getCount(); i++){
+//            resultSet.moveToPosition(i);
+//            System.out.println(resultSet.getString(0)+": "+resultSet.getInt(1));
+//        }
+//        resultSet.close();
 
-//        TextView text = (TextView)findViewById(R.id.misColecciones);
+        columns = new String[2];
+        columns[0] = "item";
+        columns[1] = "amount";
 
-        for(int i = 0; i < resultSet.getCount(); i++){
-            resultSet.moveToPosition(i);
-//            text.setText(text.getText()+"\n"+resultSet.getString(0)+": "+resultSet.getInt(1));
-        }
-        resultSet.close();
+        columnTypes = new String[2];
+        columnTypes[0] = "VARCHAR";
+        columnTypes[1] = "INT";
 
         db.insertCollection("suitcase", "testOwner", columns, columnTypes);
 
