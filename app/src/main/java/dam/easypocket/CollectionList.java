@@ -10,7 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 public class CollectionList extends BaseActivity {
@@ -20,6 +22,8 @@ public class CollectionList extends BaseActivity {
     private Button addElement;
     private Button editDesign;
     private Button explore;
+
+    private CollectionDBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +43,7 @@ public class CollectionList extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV);
-
-        CollectionDBHelper db = new CollectionDBHelper(this.getApplicationContext());
+        db = new CollectionDBHelper(this.getApplicationContext());
 
         addElement = (Button)findViewById(R.id.buttonAddElement);
         addElement.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +92,39 @@ public class CollectionList extends BaseActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        LinearLayout ll = (LinearLayout) findViewById(R.id.linSV);
+        ll.removeAllViews();
         try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from Collections", null)) {
             while (allCollectionsCursor.moveToNext()) {
                 Button item = new Button(this);
                 String collectionName = allCollectionsCursor.getString(allCollectionsCursor.getColumnIndexOrThrow(CollectionDBHelper.COLLECTIONS_COLUMN_NAME));
                 item.setText(collectionName);
-                ll.addView(item);
+
+                ImageButton delItem = new ImageButton(this);
+                delItem.setImageResource(R.drawable.delete);
+                delItem.setAdjustViewBounds(true);
+
+                LinearLayout llh = new LinearLayout(this);
+                llh.setOrientation(LinearLayout.HORIZONTAL);
+
+                llh.addView(item);
+                llh.addView(delItem);
+
+                ViewGroup.LayoutParams params = item.getLayoutParams();
+                params.width = 850;
+                item.setLayoutParams(params);
+
+                item.setLayoutParams(params);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                delItem.setLayoutParams(lp);
+
+                ll.addView(llh);
 
                 item.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -109,13 +138,33 @@ public class CollectionList extends BaseActivity {
 
                         for (int i = 0; i < lay.getChildCount(); i++) {
                             View collection = lay.getChildAt(i);
-                            if (collection instanceof Button) {
-                                Button buttonCol = (Button) collection;
-                                buttonCol.getBackground().clearColorFilter();
+
+                            for(int index = 0; index<((ViewGroup)collection).getChildCount(); ++index) {
+                                View colButton = ((ViewGroup)collection).getChildAt(index);
+                                if (colButton instanceof Button) {
+                                    Button buttonCol = (Button) colButton;
+                                    buttonCol.getBackground().clearColorFilter();
+                                }
                             }
                         }
                         currentB.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
                         currentCollectionSelected = currentB.getText().toString();
+                    }
+                });
+
+                delItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LinearLayout r = (LinearLayout)v.getParent();
+                        for(int index = 0; index<(r).getChildCount(); ++index) {
+                            View colButton = (r).getChildAt(index);
+                            if (colButton instanceof Button) {
+                                Button buttonCol = (Button) colButton;
+                                db.deleteCollection(buttonCol.getText().toString());
+                                onResume();
+                                break;
+                            }
+                        }
                     }
                 });
             }

@@ -51,6 +51,7 @@ public class SummaryVisual extends BaseActivity
 
     }
 
+    @Override
     protected void onResume(){
         super.onResume();
 
