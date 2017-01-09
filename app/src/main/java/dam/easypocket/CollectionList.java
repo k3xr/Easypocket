@@ -45,6 +45,8 @@ public class CollectionList extends BaseActivity {
 
         db = new CollectionDBHelper(this.getApplicationContext());
 
+        onResume();
+
         addElement = (Button)findViewById(R.id.buttonAddElement);
         addElement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +89,11 @@ public class CollectionList extends BaseActivity {
             public void onClick(View v) {
                 // Open new activity
                 Intent intent = new Intent(CollectionList.this, EditCollection.class);
+                intent.putExtra("currentCollectionSelected", "0");
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override

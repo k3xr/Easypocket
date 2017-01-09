@@ -219,18 +219,10 @@ class CollectionDBHelper extends SQLiteOpenHelper implements BaseColumns {
             return false;
         }
 
-//        String query = "ALTER TABLE {"+collectionName+"} ADD COLUMN "+columnName+" {"+TEXT_TYPE+"};";
-//        String valuesFormatted = "";
-
         for (String value : values) {
-            //valuesFormatted = "'" + value + "'";
             String query = "ALTER TABLE "+collectionName+" ADD COLUMN "+value+" "+"TEXT"+";";
-            //Log.d("Prueba3", "Current to add: "+ value);
-            //Log.d("Prueba3", "Current query: "+ query);
             db.execSQL(query);
         }
-
-//        String query = "INSERT INTO " + collectionName + " VALUES(" + valuesFormatted + ")";
 
         return true;
     }

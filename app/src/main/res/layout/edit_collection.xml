@@ -68,6 +68,17 @@
                     android:textStyle="normal|bold"
                     android:textAlignment="center" />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editColName"
+                    android:hint="@string/write_a_name_for_the_collection"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="30sp"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="center"
+                    android:visibility="gone"/>
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="129dp"
@@ -99,14 +110,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/buttonGuardarYSalir_1b"
-                        android:layout_weight="1"
-                        android:textAllCaps="false" />
-
-                    <Button
-                        android:text="@string/cancel_and_exit_1b"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/buttonCancelarYSalir_1b"
                         android:layout_weight="1"
                         android:textAllCaps="false" />
                 </LinearLayout>

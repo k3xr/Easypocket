@@ -45,45 +45,9 @@ public class EditCollection extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        addedColumnsName = new ArrayList<>();
-        idEditText = new ArrayList<>();
-
-        currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
-
-        TextView currentNameCollection = (TextView) findViewById(R.id.nombreColeccion);
-        currentNameCollection.setText(currentCollection);
-
         Button addField = (Button) findViewById(R.id.buttonAddCampo_1b);
         Button buttonGuardarYSalir = (Button) findViewById(R.id.buttonGuardarYSalir_1b);
-        Button buttonCancelarYSalir = (Button) findViewById(R.id.buttonCancelarYSalir_1b);
-
-        db = new CollectionDBHelper(this.getApplicationContext());
-
-        scrollLayout_1b = (LinearLayout) findViewById(R.id.llCampos_1b);
-
-        try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
-            String[] columnName = allCollectionsCursor.getColumnNames();
-            int i = 0;
-            while (i<columnName.length) {
-                LinearLayout filaContenedor = new LinearLayout(this);
-                TextView item = new TextView(this);
-                TextView itemType = new TextView(this);
-                String currentDataType =  db.getDataTypeColumn(currentCollection,columnName[i]);
-                item.setText(columnName[i]);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    item.setTextAppearance(android.R.style.TextAppearance);
-                }
-                itemType.setText(currentDataType);
-                scrollLayout_1b.addView(filaContenedor);
-                filaContenedor.addView(item);
-                filaContenedor.addView(itemType);
-                i++;
-            }
-        }
-        catch(Exception e){
-            System.out.print("Tabla sin columnas");
-        }
+//        Button buttonCancelarYSalir = (Button) findViewById(R.id.buttonCancelarYSalir_1b);
 
         addField.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +55,8 @@ public class EditCollection extends BaseActivity
                 generaNuevoFormulario();
             }
         });
+
+        onResume();
 
         buttonGuardarYSalir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +71,10 @@ public class EditCollection extends BaseActivity
                     }
                 }*/
 
+
+                EditText colName = (EditText) findViewById(R.id.editColName);
                 LinearLayout lay = (LinearLayout) findViewById(R.id.llCampos_1b);
-
                 ArrayList<String> fieldsCollector = new ArrayList<>();
-
                 for (int i = 0; i < lay.getChildCount(); i++) {
 
                     LinearLayout segundoIter = (LinearLayout)lay.getChildAt(i);
@@ -125,30 +91,88 @@ public class EditCollection extends BaseActivity
                         }
                     }
                 }
-
-                //System.out.print("fuera del bucle");
-                //Log.d("Prueba2", "Fuera del bucle y del if");
-                //Log.d("Prueba3", "Tamaño campos: "+fieldsCollector.size());
                 String[] fieldsCollected = new String[fieldsCollector.size()];
                 fieldsCollected = fieldsCollector.toArray(fieldsCollected);
-                //Log.d("Prueba2", "Current Collection: "+ currentCollection);
-                db.addColumnToCollection(currentCollection, fieldsCollected);
 
-                Intent intent = new Intent(EditCollection.this, CollectionList.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                if (colName.getVisibility() == View.VISIBLE){
+                    // new collection
+                    String[] columnTypes = new String[fieldsCollected.length];
+                    for(int i = 0; i < columnTypes.length;i++) {
+                        columnTypes[i] = "VARCHAR";
+                    }
+                    db.insertCollection(colName.getText().toString(), "testOwner", fieldsCollected, columnTypes);
+                }
+                else {
+                    db.addColumnToCollection(currentCollection, fieldsCollected);
+                }
+
+//                Intent intent = new Intent(EditCollection.this, CollectionList.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                startActivity(intent);
+                onBackPressed();
             }
         });
 
-        buttonCancelarYSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollLayout_1b.removeView((View)v.getParent());
-                Intent intent = new Intent(EditCollection.this, CollectionList.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+//        buttonCancelarYSalir.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                scrollLayout_1b.removeView((View)v.getParent());
+//                Intent intent = new Intent(EditCollection.this, CollectionList.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                startActivity(intent);
+//            }
+//        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        addedColumnsName = new ArrayList<>();
+        idEditText = new ArrayList<>();
+
+        scrollLayout_1b = (LinearLayout) findViewById(R.id.llCampos_1b);
+        db = new CollectionDBHelper(this.getApplicationContext());
+
+        currentCollection = getIntent().getExtras().getString("currentCollectionSelected");
+        System.out.println("TES T "+currentCollection);
+        TextView currentNameCollection = (TextView) findViewById(R.id.nombreColeccion);
+        EditText colName = (EditText) findViewById(R.id.editColName);
+
+        if (currentCollection != null && currentCollection.equals("0")) {
+            // New collection
+            currentNameCollection.setVisibility(View.GONE);
+            colName.setVisibility(View.VISIBLE);
+        }
+        else {
+            colName.setVisibility(View.GONE);
+            currentNameCollection.setVisibility(View.VISIBLE);
+            currentNameCollection.setText(currentCollection);
+            scrollLayout_1b.removeAllViews();
+            try (Cursor allCollectionsCursor = db.getDb().rawQuery("Select * from "+currentCollection, null)) {
+                String[] columnName = allCollectionsCursor.getColumnNames();
+                int i = 0;
+                while (i < columnName.length) {
+                    LinearLayout filaContenedor = new LinearLayout(this);
+                    TextView item = new TextView(this);
+                    TextView itemType = new TextView(this);
+//                    String currentDataType = db.getDataTypeColumn(currentCollection,columnName[i]);
+                    item.setText(columnName[i]);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        item.setTextAppearance(android.R.style.TextAppearance);
+                    }
+                    itemType.setText("text");
+                    scrollLayout_1b.addView(filaContenedor);
+                    filaContenedor.addView(item);
+                    filaContenedor.addView(itemType);
+                    i++;
+                }
             }
-        });
+            catch(Exception e){
+                System.out.println("Tabla sin columnas");
+            }
+        }
     }
 
     private boolean generaNuevoFormulario(){
